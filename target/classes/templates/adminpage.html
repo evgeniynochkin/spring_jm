@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Global</title>
+</head>
+
+<body>
+    <div class="container-fluid mt-2">
+        <div class="row-fluid">
+            <div class="col">
+                <div th:insert="~{fragments/navbar :: navbar}"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <div th:insert="~{fragments/nav :: nav}"></div>
+            </div>
+            <div class="col-lg">
+                <div class="p-3 bg-light">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                               aria-controls="first" aria-selected="true">Список пользователей</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="second-tab" data-toggle="tab" href="#second" role="tab"
+                               aria-controls="second" aria-selected="false">Новый пользователь</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                            <table class="table" border="1" cellpadding="5">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Логин</th>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each = "user : ${usersList}">
+                                    <td th:text="${user.id}">ID</td>
+                                    <td th:text="${user.login}">Login</td>
+                                    <td th:text="${user.username}">Name</td>
+                                    <td>
+                                        <a class="btn btn-primary" th:href="@{'/adminpage/edit/' + ${user.id}}" role="button">Редактировать</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button">Удалить</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
+                            <div class="container mt-3">
+                                <form action="#" th:action="@{/adminpage}" th:object="${user}" method="post">
+                                    <h2>Редактировать пользователя</h2>
+                                    <div class="form-group">
+                                        <label for="formGroupID">ID</label>
+                                        <input type="text" class="form-control" th:field="*{id}"
+                                               id="formGroupID" placeholder="ID" readonly="readonly" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupLoginInput">Логин</label>
+                                        <input type="text" class="form-control" th:field="*{login}"
+                                               id="formGroupLoginInput" placeholder="Логин"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupPasswordInput">Пароль</label>
+                                        <input type="text" class="form-control" th:field="*{password}"
+                                               id="formGroupPasswordInput" placeholder="Пароль"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupUsernameInput">Имя</label>
+                                        <input type="text" class="form-control" th:field="*{username}"
+                                               id="formGroupUsernameInput" placeholder="Имя"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

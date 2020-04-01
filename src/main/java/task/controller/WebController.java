@@ -25,21 +25,10 @@ public class WebController {
         this.usi = usi;
     }
 
-    @RequestMapping(value = {"/", "/index"})
-    public String viewHomePage(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
-            UserDataSet loguser = (UserDataSet) auth.getPrincipal();
-            model.addAttribute("userlogined", loguser);
-//            return "adminpage";
-        }
-        return "login";
-    }
-
-    @GetMapping(value = "/login")
+    @GetMapping(value = {"/", "/index"})
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("login");
+        mav.setViewName("index");
         return mav;
     }
 
@@ -97,29 +86,4 @@ public class WebController {
         mav.setViewName("news");
         return mav;
     }
-
-//    @RequestMapping(value={"/","home"})
-//    public String home(){
-//        return "home";
-//    }
-//
-//    @RequestMapping(value="/user")
-//    public String user(){
-//        return "user";
-//    }
-//
-//    @RequestMapping(value="/admin")
-//    public String admin(){
-//        return "admin";
-//    }
-//
-//    @RequestMapping(value="/login")
-//    public String login(){
-//        return "login";
-//    }
-//
-//    @RequestMapping(value="/403")
-//    public String Error403(){
-//        return "403";
-//    }
 }

@@ -36,12 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/news/**").access("hasAuthority('ROLE_USER')")
                 .antMatchers("/adminpage/**", "/news/**").access("hasAuthority('ROLE_ADMIN')")
+//                .antMatchers("/", "index").permitAll()
+//                .antMatchers("/news/**").hasRole("USER")
+//                .antMatchers("/adminpage/**", "/news/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and();
         http.formLogin()
+                .loginPage("/index")
                 .successHandler(customizeAuthenticationSuccessHandler)
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
+//                .defaultSuccessUrl("/")
                 .permitAll()
                 .and();
         http.logout()
@@ -52,9 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder getPasswordEncoder() { return NoOpPasswordEncoder.getInstance();}
 
-//    @Autowired
-//    CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
-//
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http

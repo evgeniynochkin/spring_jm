@@ -26,19 +26,24 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         response.setStatus(HttpServletResponse.SC_OK);
 
         boolean admin = false;
+        boolean user = false;
 
         logger.info("AT onAuthenticationSuccess(...) function!");
 
         for (GrantedAuthority auth : authentication.getAuthorities()) {
-            if ("ROLE_ADMIN".equals(auth.getAuthority())){
+            if ("ROLE_ADMIN".equals(auth.getAuthority())) {
                 admin = true;
+            } else if ("ROLE_USER".equals(auth.getAuthority())) {
+                user = true;
             }
         }
 
-        if(admin){
+        if (admin) {
             response.sendRedirect("/adminpage");
-        }else{
+        } else if (user){
             response.sendRedirect("/news");
+        } else {
+            response.sendRedirect("/index");
         }
     }
 }

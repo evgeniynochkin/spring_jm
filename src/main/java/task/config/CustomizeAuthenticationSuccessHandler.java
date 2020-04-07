@@ -41,7 +41,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         if (admin) {
             response.sendRedirect("/adminpage");
         } else if (user){
-            response.sendRedirect("/news");
+            response.sendRedirect("/adminpage");
         } else {
             response.sendRedirect("/index");
         }

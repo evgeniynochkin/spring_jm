@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -23,24 +24,15 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
                                         HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
         //set our response to OK status
-        response.setStatus(HttpServletResponse.SC_OK);
-
-        boolean admin = false;
-        boolean user = false;
 
         logger.info("AT onAuthenticationSuccess(...) function!");
 
-        for (GrantedAuthority auth : authentication.getAuthorities()) {
-            if ("ROLE_ADMIN".equals(auth.getAuthority())) {
-                admin = true;
-            } else if ("ROLE_USER".equals(auth.getAuthority())) {
-                user = true;
-            }
-        }
-
-        if (admin) {
+        if (authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+            logger.info("ADMIN = true");
             response.sendRedirect("/news");
-        } else if (user){
+        } else if (authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"))){
             logger.info("USER = true");
             response.sendRedirect("/news");
         } else {

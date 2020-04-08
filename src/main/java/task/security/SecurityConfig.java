@@ -1,4 +1,4 @@
-package task.config;
+package task.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,10 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/news/**").access("hasAuthority('ROLE_USER')")
-                .antMatchers("/adminpage/**", "/news/**").access("hasAuthority('ROLE_ADMIN')")
-                .anyRequest().authenticated()
-                .and();
+                .antMatchers("/news/**").access("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/adminpage/**").access("hasAuthority('ROLE_ADMIN')")
+                .and()
+                .csrf().disable();
         http.formLogin()
                 .loginPage("/index")
                 .successHandler(customizeAuthenticationSuccessHandler)

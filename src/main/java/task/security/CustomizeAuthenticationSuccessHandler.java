@@ -1,6 +1,7 @@
-package task.config;
+package task.security;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,16 +25,15 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        //set our response to OK status
 
         logger.info("AT onAuthenticationSuccess(...) function!");
 
         if (authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
             logger.info("ADMIN = true");
-            response.sendRedirect("/news");
+            response.sendRedirect("/adminpage");
         } else if (authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"))){
+                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"))) {
             logger.info("USER = true");
             response.sendRedirect("/news");
         } else {

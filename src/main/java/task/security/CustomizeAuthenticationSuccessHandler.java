@@ -28,13 +28,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         logger.info("AT onAuthenticationSuccess(...) function!");
 
-        if (authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
-            logger.info("ADMIN = true");
+        if (authentication.getAuthorities().toString().contains("ADMIN")) {
             response.sendRedirect("/adminpage");
-        } else if (authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_USER"))) {
-            logger.info("USER = true");
+        } else if (authentication.getAuthorities().toString().contains("USER")) {
             response.sendRedirect("/news");
         } else {
             response.sendRedirect("/index");

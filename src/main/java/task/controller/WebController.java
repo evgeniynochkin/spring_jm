@@ -65,10 +65,10 @@ public class WebController {
 
     @RequestMapping("/adminpage/edit/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") long id) {
-        ModelAndView mav = new ModelAndView("AdminForm");
-        UserDataSet usd = usi.getUserById(id);
-
-        mav.addObject("user", usd);
+        ModelAndView mav = new ModelAndView("edituser");
+//        UserDataSet usd = usi.getUserById(id);
+//
+//        mav.addObject("user", usd);
         return mav;
     }
 

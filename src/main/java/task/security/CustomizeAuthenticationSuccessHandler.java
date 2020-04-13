@@ -30,10 +30,8 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         if (authentication.getAuthorities().toString().contains("ADMIN")) {
             response.sendRedirect("/adminpage");
-        } else if (authentication.getAuthorities().toString().contains("USER")) {
-            response.sendRedirect("/news");
         } else {
-            response.sendRedirect("/index");
+            response.sendRedirect("/news");
         }
     }
 }

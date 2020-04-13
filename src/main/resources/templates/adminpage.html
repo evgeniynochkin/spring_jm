@@ -53,7 +53,8 @@
                                     <td th:text="${user.login}">Login</td>
                                     <td th:text="${user.username}">Name</td>
                                     <td>
-                                        <a class="btn btn-primary" th:href="@{'/adminpage/edit/' + ${user.id}}" role="button">Редактировать</a>
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button">Удалить</a>
                                     </td>
@@ -62,7 +63,7 @@
                             </table>
                         </div>
 
-                        <div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
+                        <!--<div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
                             <div class="container mt-3">
                                 <form action="#" th:action="@{/adminpage}" th:object="${user}" method="post">
                                     <h2>Редактировать пользователя</h2>
@@ -89,10 +90,42 @@
                                     <button type="submit" class="btn btn-primary" value="save">Отправить</button>
                                 </form>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="editModalWindow" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="#" th:action="@{/admin/save}" th:object="${user}" method="post">
+                    <h2>Редактировать пользователя</h2>
+                    <div class="form-group">
+                        <label for="formGroupIDEdit">ID</label>
+                        <input type="text" class="form-control" th:field="*{id}"
+                               id="formGroupIDEdit" placeholder="ID" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupLoginInputEdit">Логин</label>
+                        <input type="text" class="form-control" th:field="*{login}"
+                               id="formGroupLoginInputEdit" placeholder="Логин"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupPasswordInputEdit">Пароль</label>
+                        <input type="text" class="form-control" th:field="*{password}"
+                               id="formGroupPasswordInputEdit" placeholder="Пароль"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupUsernameInputEdit">Имя</label>
+                        <input type="text" class="form-control" th:field="*{username}"
+                               id="formGroupUsernameInputEdit" placeholder="Имя"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>
+                </form>
             </div>
         </div>
     </div>
@@ -102,3 +135,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
+
+$("#editModalWindow").on('show.bs.modal', function(e) {
+var userId = $(e.relatedTarget).data('user.id');
+
+var cols = $('#user-' + userId + ' td');
+var login = $(cols[0]).text();
+var password = $(cols[1]).text();
+var username = $(cols[2]).text();
+
+$('#formGroupLoginInputEdit').val(login);
+$('#formGroupPasswordInputEdit').val(password);
+$('#formGroupUsernameInputEdit').val(username);
+});

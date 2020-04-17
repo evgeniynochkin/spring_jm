@@ -60,22 +60,19 @@ public class WebController {
     @RequestMapping("/adminpage/save")
     public String saveUser(@ModelAttribute("user") UserDataSet uds)  {
         usi.saveUser(uds);
-        return "adminpage";
+        return "redirect:/adminpage";
     }
 
-    @RequestMapping("/adminpage/edit/{id}")
-    public ModelAndView editUser(@PathVariable(name = "id") long id) {
-        ModelAndView mav = new ModelAndView("edituser");
-//        UserDataSet usd = usi.getUserById(id);
-//
-//        mav.addObject("user", usd);
-        return mav;
+    @GetMapping(value = "/adminpage/{id}")
+    @ResponseBody
+    public UserDataSet getUDS(@PathVariable(name="id") long id) {
+        return usi.getUserById(id);
     }
 
     @RequestMapping("/adminpage/delete/{id}")
     public String deleteUser(@PathVariable(name = "id") long id) {
         usi.removeUser(id);
-        return "redirect:/";
+        return "redirect:/adminpage";
     }
 
     @GetMapping(value = "/news")
@@ -86,4 +83,5 @@ public class WebController {
         mav.setViewName("news");
         return mav;
     }
+
 }

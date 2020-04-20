@@ -13,10 +13,10 @@
 
 <body>
 
-<div class="container" th:fragment="navbar">
+<div class="container-fluid" th:fragment="navbar">
     <nav class="navbar navbar-light bg-info">
         <a class="navbar-brand">Springtask</a>
-        <a class="text-dark" th:action="@{/logout}" method="post">Log out</a>
+        <a th:href="@{/logout}">Log out</a>
     </nav>
 </div>
 

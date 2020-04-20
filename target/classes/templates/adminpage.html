@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Global</title>
+
+    <script src="/js/edit.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -37,7 +39,7 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
-                            <table class="table" border="1" cellpadding="5">
+                            <table class="table" id="userTable" border="1" cellpadding="5">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -49,111 +51,57 @@
 
                                 <tbody>
                                 <tr th:each = "user : ${usersList}">
-                                    <td th:text="${user.id}">ID</td>
+                                    <td th:text="${user.id}" id="userId" name="userId">ID</td>
                                     <td th:text="${user.login}">Login</td>
                                     <td th:text="${user.username}">Name</td>
                                     <td>
 
-                                        <!-- Button trigger modal -->
-<!--                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModalWindow">-->
-<!--                                            Запустить модальное окно-->
-<!--                                        </button>-->
+                                        <button type="button" class="btn btn-primary" onclick="RestGet(this)" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
 
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
-
-                                        <!--<a class="btn btn-primary" role="button" data-toggle="modal" href="#EditModalWindow">Редактировать</a>-->
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button">Удалить</a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-
-                        <!-- Модальное окно -->
-                        <!--<div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
-                            <div class="container mt-3">
-                                <form action="#" th:action="@{/adminpage}" th:object="${user}" method="post">
-                                    <h2>Редактировать пользователя</h2>
-                                    <div class="form-group">
-                                        <label for="formGroupID">ID</label>
-                                        <input type="text" class="form-control" th:field="*{id}"
-                                               id="formGroupID" placeholder="ID" readonly="readonly" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="formGroupLoginInput">Логин</label>
-                                        <input type="text" class="form-control" th:field="*{login}"
-                                               id="formGroupLoginInput" placeholder="Логин"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="formGroupPasswordInput">Пароль</label>
-                                        <input type="text" class="form-control" th:field="*{password}"
-                                               id="formGroupPasswordInput" placeholder="Пароль"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="formGroupUsernameInput">Имя</label>
-                                        <input type="text" class="form-control" th:field="*{username}"
-                                               id="formGroupUsernameInput" placeholder="Имя"/>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>
-                                </form>
-                            </div>
-                        </div>-->
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-<!--    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    ...-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
+    <!-- Модальное окно -->
     <div class="modal fade" id="editModalWindow" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="#" th:action="@{/admin/save}" th:object="${user}" method="post">
-                    <h2>Редактировать пользователя</h2>
-                    <div class="form-group">
-                        <label for="formGroupIDEdit">ID</label>
-                        <input type="text" class="form-control" th:field="*{id}"
-                               id="formGroupIDEdit" placeholder="ID" readonly="readonly" />
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="#" th:action="@{/adminpage/save}" th:object="${user}" method="post">
+                            <h2>Редактировать пользователя</h2>
+                            <div class="form-group">
+                                <label for="formGroupIDEdit">ID</label>
+                                <input type="text" class="form-control" th:field="*{id}"
+                                       id="formGroupIDEdit" placeholder="ID" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupLoginInputEdit">Логин</label>
+                                <input type="text" class="form-control" th:field="*{login}"
+                                       id="formGroupLoginInputEdit" placeholder="Логин"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupPasswordInputEdit">Пароль</label>
+                                <input type="text" class="form-control" th:field="*{password}"
+                                       id="formGroupPasswordInputEdit" placeholder="Пароль"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupUsernameInputEdit">Имя</label>
+                                <input type="text" class="form-control" th:field="*{username}"
+                                       id="formGroupUsernameInputEdit" placeholder="Имя"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary" value="save">Отправить</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="formGroupLoginInputEdit">Логин</label>
-                        <input type="text" class="form-control" th:field="*{login}"
-                               id="formGroupLoginInputEdit" placeholder="Логин"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupPasswordInputEdit">Пароль</label>
-                        <input type="text" class="form-control" th:field="*{password}"
-                               id="formGroupPasswordInputEdit" placeholder="Пароль"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupUsernameInputEdit">Имя</label>
-                        <input type="text" class="form-control" th:field="*{username}"
-                               id="formGroupUsernameInputEdit" placeholder="Имя"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>

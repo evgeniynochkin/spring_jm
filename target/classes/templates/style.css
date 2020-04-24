@@ -1,12 +1,7 @@
-h3 {
-    color:green;
+a {
+    color:orange;
 }
 
-body {
-    margin: 30px;
-    }
-
-[class="row"] {
-    width:100%;
-    color:red;
+h3 {
+    color:blueviolet;
 }

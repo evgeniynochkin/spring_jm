@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import task.DAO.UserDataSetRepository;
 import task.model.UserDataSet;
 import task.service.UserServiceImpl;
 
@@ -30,29 +31,29 @@ public class WebController {
         return mav;
     }
 
-    @GetMapping("/adminpage")
-    public String usersList(Model model) {
-        List<UserDataSet> usersList = usi.findAllUsers();
-        model.addAttribute("usersList", usersList);
-        model.addAttribute("user", new UserDataSet());
-        return "adminpage";
-    }
+//    @GetMapping("/adminpage")
+//    public String usersList(Model model) {
+//        List<UserDataSet> usersList = usi.findAllUsers();
+//        model.addAttribute("usersList", usersList);
+//        model.addAttribute("user", new UserDataSet());
+//        return "adminpage";
+//    }
 
     @PostMapping("/adminpage")
     public String saveUser(@ModelAttribute("user") @Valid UserDataSet uds, BindingResult bindingResult, Model model) {
 
         if (!usi.saveUser(uds)) {
             model.addAttribute("loginError", "Логин уже существует");
-            return "adminpage";
+            return "redirect:/adminpage";
         }
 
         if (bindingResult.hasErrors()) {
-            return "adminpage";
+            return "redirect:/adminpage";
         } else {
             usi.saveUser(uds);
         }
 
-        return "adminpage";
+        return "redirect:/adminpage";
     }
 
     @RequestMapping("/adminpage/save")

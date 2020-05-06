@@ -12,13 +12,21 @@
 </head>
 
 <body>
-    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <div class="grid-container">
+        <div class="header">
+            <div th:insert="~{fragments/navbar :: navbar}"></div>
+        </div>
 
-    <div align="center">
-        <h2>Вы вошли как пользователь</h2>
-        <h3 th:text="${user.getUsername()}"></h3>
+        <div class="left_body">
+            <div th:insert="~{fragments/nav :: nav}"></div>
+        </div>
 
-        <h4><a href="/index">Главная</a></h4>
+        <div align="center">
+            <h2>Страница пользователя</h2>
+            <h3> Привет </h3> <h3 th:text="${user.getUsername()}"></h3>
+
+            <h5><a href="/index">Главная</a></h5>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

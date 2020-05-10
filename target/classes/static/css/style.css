@@ -1,0 +1,49 @@
+.start {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    overflow: auto;
+    background-color: lightgrey;
+}
+
+#login_form {
+    margin: auto;
+    margin-top: 7%;
+}
+
+.grid-container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 7% 90%;
+    grid-template-areas:
+        "header header"
+        "left_body rigth_body"
+}
+
+.header {
+    width: 100%;
+    justify-self: stretch;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: #343A40;
+}
+
+.left_body {
+     background-color: #F0F8FF;
+}
+
+.rigth_body {
+    background-color: #F8F9FA;
+}
+
+#admin_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

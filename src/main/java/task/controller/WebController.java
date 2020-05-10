@@ -32,12 +32,13 @@ public class WebController {
     }
 
 //    @GetMapping("/adminpage")
-//    public String usersList(Model model) {
+    @RequestMapping("/adminpage")
+    public String usersList(Model model) {
 //        List<UserDataSet> usersList = usi.findAllUsers();
 //        model.addAttribute("usersList", usersList);
 //        model.addAttribute("user", new UserDataSet());
-//        return "adminpage";
-//    }
+        return "redirect:/adminpage";
+    }
 
     @PostMapping("/adminpage")
     public String saveUser(@ModelAttribute("user") @Valid UserDataSet uds, BindingResult bindingResult, Model model) {

@@ -10,30 +10,18 @@ async function RestGet(el) {
         $('#formGroupUsernameInputEdit').val(myuser.username);
 }
 
-$(document).ready(function () {
+$(document).ready(async function () {
 
-        let response = fetch('/adminpage/list');
-        let listuser = response.json();
-
-        console.log(listuser)
-
-        //Построение таблицы 3х3 в myTable
-        var elem = document.querySelector('#myTable');
-        var table = document.createElement('table');
-        for (var i = 0; i < 3; i++) {
-                var tr = document.createElement('tr');
-                for (var j = 0; j < 3; j++) {
-                        var td = document.createElement('td');
-                        tr.appendChild(td);
-                }
-                table.appendChild(tr);
-        }
-        elem.appendChild(table);
-
-        //
+        var div = document.createElement("div");
         var tab = '<table class="table" id="userTable" border="1" cellpadding="5">';
         tab += '<thead><tr>';
         tab += '<th scope="col">ID</th><th scope="col">Логин</th><th scope="col">Имя</th><th scope="col">Действие</th>';
         tab += '</tr></thead></table>';
-        return tab;
+        div.innerHTML = tab;
+        document.getElementById('myTable').appendChild(div);
+
+        let response = await fetch('/adminpage/list');
+        let listuser = await response.json();
+
+        console.log(listuser);
 });

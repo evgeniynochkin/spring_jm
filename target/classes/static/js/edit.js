@@ -17,15 +17,15 @@ $(document).ready(function () {
 
         console.log(listuser)
 
-        // var tab = '<table class="table" id="userTable" border="1" cellpadding="5">';
-        // tab += '<thead><tr>';
-        // tab += '<th scope="col">ID</th><th scope="col">Логин</th><th scope="col">Имя</th><th scope="col">Действие</th>';
-        // tab += '</tr></thead></table>';
-        // return tab;
 
-        var elem = document.querySelector('#myTabl');
-
+        var elem = document.querySelector('#myTable');
         createTable(elem, 3, 3);
+
+        var tab = '<table class="table" id="userTable" border="1" cellpadding="5">';
+        tab += '<thead><tr>';
+        tab += '<th scope="col">ID</th><th scope="col">Логин</th><th scope="col">Имя</th><th scope="col">Действие</th>';
+        tab += '</tr></thead></table>';
+        return tab;
 });
 
 function tableCreate() {

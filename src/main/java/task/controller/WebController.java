@@ -31,13 +31,19 @@ public class WebController {
         return mav;
     }
 
-//    @GetMapping("/adminpage")
-    @RequestMapping("/adminpage")
-    public String usersList(Model model) {
+//    @RequestMapping("/adminpage")
+//    public String usersList(Model model) {
 //        List<UserDataSet> usersList = usi.findAllUsers();
 //        model.addAttribute("usersList", usersList);
 //        model.addAttribute("user", new UserDataSet());
-        return "redirect:/adminpage";
+//        return "adminpage";
+//    }
+
+    @GetMapping(value = {"/adminpage"})
+    public ModelAndView adminpage() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("adminpage");
+        return mav;
     }
 
     @PostMapping("/adminpage")

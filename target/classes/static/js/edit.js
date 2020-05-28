@@ -17,17 +17,27 @@ $(document).ready(async function () {
         let listuser = await response.json();
 
         //Шапка таблицы
-        let tab = `<table class="table" id="userTable" border="1" cellpadding="5">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Логин</th>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Действие</th>
-                            </tr>
-                        </thead>
-                    </table>`;
-        $('#myTable').append(tab);
+        // let tab = `<table class="table" id="userTable" border="1" cellpadding="5">
+        //                 <thead>
+        //                     <tr>
+        //                         <th scope="col">ID</th>
+        //                         <th scope="col">Логин</th>
+        //                         <th scope="col">Имя</th>
+        //                         <th scope="col">Действие</th>
+        //                     </tr>
+        //                 </thead>
+        //             </table>`;
+        // $('#myTable').append(tab);
+
+        let tab = `<thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Логин</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                    </thead>`;
+        $('#userTable').append(tab);
 
         // console.log(listuser);
 
@@ -43,7 +53,7 @@ $(document).ready(async function () {
                      </td>
                 </tr>`;
         });
-        $('#myTable').append(lusers);
+        $('#userTable').append(lusers);
 
         // const luser = listuser.map(({id, username, login, password, passwordConfirm}) => `\n${id} ${username} ${login} ${password} ${passwordConfirm}`).join('');
         // consol.log(luser);

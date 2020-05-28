@@ -12,16 +12,46 @@ async function RestGet(el) {
 
 $(document).ready(async function () {
 
-        var div = document.createElement("div");
-        var tab = '<table class="table" id="userTable" border="1" cellpadding="5">';
-        tab += '<thead><tr>';
-        tab += '<th scope="col">ID</th><th scope="col">Логин</th><th scope="col">Имя</th><th scope="col">Действие</th>';
-        tab += '</tr></thead></table>';
-        div.innerHTML = tab;
-        document.getElementById('myTable').appendChild(div);
 
         let response = await fetch('/adminpage/list');
         let listuser = await response.json();
 
-        console.log(listuser);
+        //Шапка таблицы
+        let tab = `<table class="table" id="userTable" border="1" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Логин</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Действие</th>
+                            </tr>
+                        </thead>
+                    </table>`;
+        $('#myTable').append(tab);
+
+        // console.log(listuser);
+
+        let lusers = listuser.map(user => {
+                const {id, login, username} = user;
+                return `<tr>
+                     <th scope="col">${user.id}</th>
+                     <th scope="col">${user.login}</th>
+                     <th scope="col">${user.username}</th>
+                     <td>
+                           <button type="button" class="btn btn-primary" onclick="RestGet(this)" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
+                           <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button" th:formmethod="delete">Удалить</a>
+                     </td>
+                </tr>`;
+        });
+        $('#myTable').append(lusers);
+
+        // const luser = listuser.map(({id, username, login, password, passwordConfirm}) => `\n${id} ${username} ${login} ${password} ${passwordConfirm}`).join('');
+        // consol.log(luser);
+        // $('#myTable').append(lusers);
+
+        // for (count = 0; count < listuser.length; count++) {
+        //         const user = listuser[count];
+        //         console.log(user.login);
+        // }
+
 });

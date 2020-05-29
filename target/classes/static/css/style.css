@@ -47,3 +47,13 @@
     align-items: center;
     justify-content: center;
 }
+
+#tabHead {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#tabBody {
+    font-size: 16px;
+    font-weight: normal;
+}

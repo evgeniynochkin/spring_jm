@@ -31,14 +31,6 @@ public class WebController {
         return mav;
     }
 
-//    @RequestMapping("/adminpage")
-//    public String usersList(Model model) {
-//        List<UserDataSet> usersList = usi.findAllUsers();
-//        model.addAttribute("usersList", usersList);
-//        model.addAttribute("user", new UserDataSet());
-//        return "adminpage";
-//    }
-
     @GetMapping(value = {"/adminpage"})
     public ModelAndView adminpage() {
         ModelAndView mav = new ModelAndView();

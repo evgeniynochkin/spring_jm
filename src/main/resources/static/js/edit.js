@@ -12,12 +12,11 @@ async function RestGet(el) {
 
 $(document).ready(async function () {
 
-
         let response = await fetch('/adminpage/list');
         let listuser = await response.json();
 
         //Шапка таблицы
-        let tab = `<thead>
+        let tab = `<thead id="tabHead">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Логин</th>
@@ -30,15 +29,18 @@ $(document).ready(async function () {
         //Заполнение таблицы
         let lusers = listuser.map(user => {
                 const {id, login, username} = user;
-                return `<tr>
-                     <th scope="col">${user.id}</th>
-                     <th scope="col">${user.login}</th>
-                     <th scope="col">${user.username}</th>
-                     <td>
-                           <button type="button" class="btn btn-primary" onclick="RestGet(this)" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
-                           <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button" th:formmethod="delete">Удалить</a>
-                     </td>
-                </tr>`;
+                return `<tbody id="tabBody">
+                            <tr>
+                                     <th scope="col">${user.id}</th>
+                                     <th scope="col">${user.login}</th>
+                                     <th scope="col">${user.username}</th>
+                                     <td>
+                                           <button type="button" class="btn btn-primary" onclick="RestGet(this)" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
+                                           <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button" th:formmethod="delete">Удалить</a>
+                                     </td>
+                            </tr>
+                        </tbody>`;
         });
         $('#userTable').append(lusers);
 });
+

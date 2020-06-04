@@ -35,9 +35,9 @@ async function GetUser(id) {
 }
 
 //Edit user
-$('.nav-tabs a[href="#admin_form"]').on('shown.bs.tab', function () {
-        console.log("test");
-});
+// $('.nav-tabs a[href="#admin_form"]').on('shown.bs.tab', function () {
+//         console.log("test");
+// });
 
 //Delete user
 async function DeleteUser(id) {
@@ -56,17 +56,20 @@ async function NewUser(form) {
                 "username" : form.username,
                 "login" : form.login,
                 "password" : form.password
-        }
+        };
 
-        fetch('/adminpage/' + newuser, {
-                method: 'POST'
-        }).then(() => {
-                console.log('add');
-        }).catch(err => {
-                console.error(err)
-        });
+        fetch('/adminpage/', {
+                method: 'POST',
+                headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newuser).then(res => res.json())
+                    .then(res => console.log(res))
+                });
 
-        console.log(newuser);
+        alert(newuser);
+        // console.log(newuser);
 }
 
 //Preload page

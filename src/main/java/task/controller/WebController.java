@@ -38,22 +38,22 @@ public class WebController {
         return mav;
     }
 
-    @PostMapping("/adminpage")
-    public String saveUser(@ModelAttribute("user") @Valid UserDataSet uds, BindingResult bindingResult, Model model) {
-
-        if (!usi.saveUser(uds)) {
-            model.addAttribute("loginError", "Логин уже существует");
-            return "redirect:/adminpage";
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "redirect:/adminpage";
-//        } else {
-//            usi.saveUser(uds);
-        }
-
-        return "redirect:/adminpage";
-    }
+//    @PostMapping("/adminpage")
+////    public String saveUser(@ModelAttribute("user") @Valid UserDataSet uds, BindingResult bindingResult, Model model) {
+////
+////        if (!usi.saveUser(uds)) {
+////            model.addAttribute("loginError", "Логин уже существует");
+////            return "redirect:/adminpage";
+////        }
+////
+////        if (bindingResult.hasErrors()) {
+////            return "redirect:/adminpage";
+////        } else {
+////            usi.saveUser(uds);
+////        }
+////
+////        return "redirect:/adminpage";
+////    }
 
     @GetMapping(value = "/news")
     public ModelAndView news() {

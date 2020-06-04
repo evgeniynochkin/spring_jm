@@ -1,15 +1,75 @@
-async function RestGet(el) {
-        var rep = el.parentNode.parentNode.cells[0].innerHTML;
+//User by id
+async function GetUser(id) {
+        let response = await fetch('/adminpage/' + id, {
+                method: 'GET'
+        });
+        let userbyid = await response.json();
 
-        let response = await fetch('/adminpage/' + rep);
-        let myuser = await response.json();
+        let formedit = `<form>
+                            <h2>Редактировать пользователя</h2>
+                            <div class="form-group">
+                                <label>ID</label>
+                                <input type="text" class="form-control" name="Id" value="${userbyid.id}"
+                                       placeholder="ID" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label>Логин</label>
+                                <input type="text" class="form-control" name="Login" value="${userbyid.login}"
+                                       placeholder="Логин"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Пароль</label>
+                                <input type="text" class="form-control" name="Password" value="${userbyid.password}"
+                                       placeholder="Пароль"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Имя</label>
+                                <input type="text" class="form-control" name="Username" value="${userbyid.username}"
+                                       placeholder="Имя"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="EditUser(${user.id})" value="save">Отправить</button>
+                        </form>`
 
-        $('#formGroupIDEdit').val(myuser.id);
-        $('#formGroupLoginInputEdit').val(myuser.login);
-        $('#formGroupPasswordInputEdit').val(myuser.password);
-        $('#formGroupUsernameInputEdit').val(myuser.username);
+        $('#editForm').append(formedit);
+        $('#editModalWindow').modal('show');
 }
 
+//Edit user
+$('.nav-tabs a[href="#admin_form"]').on('shown.bs.tab', function () {
+        console.log("test");
+});
+
+//Delete user
+async function DeleteUser(id) {
+        fetch('/adminpage/' + id, {
+                method: 'DELETE'
+        }).then(() => {
+                console.log('removed');
+        }).catch(err => {
+                console.error(err)
+        });
+}
+
+//New user
+async function NewUser(form) {
+        let newuser = {
+                "username" : form.username,
+                "login" : form.login,
+                "password" : form.password
+        }
+
+        fetch('/adminpage/' + newuser, {
+                method: 'POST'
+        }).then(() => {
+                console.log('add');
+        }).catch(err => {
+                console.error(err)
+        });
+
+        console.log(newuser);
+}
+
+//Preload page
 $(document).ready(async function () {
 
         let response = await fetch('/adminpage/list');
@@ -35,12 +95,13 @@ $(document).ready(async function () {
                                      <th scope="col">${user.login}</th>
                                      <th scope="col">${user.username}</th>
                                      <td>
-                                           <button type="button" class="btn btn-primary" onclick="RestGet(this)" data-toggle="modal" data-target="#editModalWindow">Редактировать</button>
-                                           <a class="btn btn-primary" th:href="@{'/adminpage/delete/' + ${user.id}}" role="button" th:formmethod="delete">Удалить</a>
+                                           <button type="button" class="btn btn-primary" onclick="GetUser(${user.id})">Редактировать</button>
+                                           <button type="button" class="btn btn-primary" onclick="DeleteUser(${user.id})">Удалить</button>
                                      </td>
                             </tr>
                         </tbody>`;
         });
         $('#userTable').append(lusers);
 });
+
 

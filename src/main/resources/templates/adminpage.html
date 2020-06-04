@@ -40,32 +40,32 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                            <table class="table" id="userTable" border="1" cellpadding="5">
 
-                            <table class="table" id="userTable" border="1" cellpadding="5"></table>
+                            </table>
+                        </div>
 
                         <div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
                             <div class="container mt-3" id="admin_form">
-
-<!--                                <form action="#" th:action="@{/adminpage/save}" th:object="${user}" method="post">-->
-<!--                                    <h4>Добавить нового пользователя</h4>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label for="formGroupLoginInput">Логин</label>-->
-<!--                                        <input type="text" class="form-control" th:field="*{login}"-->
-<!--                                               id="formGroupLoginInput" placeholder="Логин"/>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label for="formGroupPasswordInput">Пароль</label>-->
-<!--                                        <input type="text" class="form-control" th:field="*{password}"-->
-<!--                                               id="formGroupPasswordInput" placeholder="Пароль"/>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label for="formGroupUsernameInput">Имя</label>-->
-<!--                                        <input type="text" class="form-control" th:field="*{username}"-->
-<!--                                               id="formGroupUsernameInput" placeholder="Имя"/>-->
-<!--                                    </div>-->
-<!--                                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>-->
-<!--                                </form>-->
-
+                                <form action="" method="POST" onsubmit="NewUser(this)">
+                                    <h4>Добавить нового пользователя</h4>
+                                    <div class="form-group">
+                                        <label for="formGroupLoginInput">Логин</label>
+                                        <input type="text" class="form-control"
+                                               id="formGroupLoginInput" placeholder="Логин"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupPasswordInput">Пароль</label>
+                                        <input type="text" class="form-control"
+                                               id="formGroupPasswordInput" placeholder="Пароль"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupUsernameInput">Имя</label>
+                                        <input type="text" class="form-control"
+                                               id="formGroupUsernameInput" placeholder="Имя"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" value="save">Отправить</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -75,12 +75,13 @@
 
 
     <!-- Модальное окно -->
-<!--    <div class="modal fade" id="editModalWindow" tabindex="-1" role="dialog">-->
-<!--        <div class="modal-body">-->
-<!--            <div class="container-fluid">-->
-<!--                <div class="modal-dialog" role="document">-->
-<!--                    <div class="modal-content">-->
-<!--                        <form action="#" th:action="@{/adminpage}" th:object="${user}" method="post">-->
+    <div class="modal fade" id="editModalWindow" tabindex="-1" role="dialog">
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="editForm">
+
+<!--                        <form action="#" th:action="@{/adminpage}" th:object="${user}" method="put">-->
 <!--                            <h2>Редактировать пользователя</h2>-->
 <!--                            <div class="form-group">-->
 <!--                                <label for="formGroupIDEdit">ID</label>-->
@@ -104,11 +105,12 @@
 <!--                            </div>-->
 <!--                            <button type="submit" class="btn btn-primary" value="save">Отправить</button>-->
 <!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -48,28 +48,10 @@ public class WebController {
 
         if (bindingResult.hasErrors()) {
             return "redirect:/adminpage";
-        } else {
-            usi.saveUser(uds);
+//        } else {
+//            usi.saveUser(uds);
         }
 
-        return "redirect:/adminpage";
-    }
-
-    @RequestMapping("/adminpage/save")
-    public String saveUser(@ModelAttribute("user") UserDataSet uds)  {
-        usi.saveUser(uds);
-        return "redirect:/adminpage";
-    }
-
-    @GetMapping(value = "/adminpage/{id}")
-    @ResponseBody
-    public UserDataSet getUDS(@PathVariable(name="id") long id) {
-        return usi.getUserById(id);
-    }
-
-    @RequestMapping("/adminpage/delete/{id}")
-    public String deleteUser(@PathVariable(name = "id") long id) {
-        usi.removeUser(id);
         return "redirect:/adminpage";
     }
 

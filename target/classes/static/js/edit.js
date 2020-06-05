@@ -58,7 +58,7 @@ async function NewUser(form) {
                 "password" : form.password
         };
 
-        fetch('/adminpage/', {
+        fetch('/adminpage/new', {
                 method: 'POST',
                 headers: {
                         'Accept': 'application/json, text/plain, */*',
@@ -68,7 +68,7 @@ async function NewUser(form) {
                     .then(res => console.log(res))
                 });
 
-        alert(newuser);
+        // alert(newuser);
         // console.log(newuser);
 }
 

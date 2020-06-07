@@ -5,7 +5,7 @@ async function GetUser(id) {
         });
         let userbyid = await response.json();
 
-        let formedit = `<form>
+        let formedit = `<form name="editform">
                             <h2>Редактировать пользователя</h2>
                             <div class="form-group">
                                 <label>ID</label>
@@ -35,9 +35,23 @@ async function GetUser(id) {
 }
 
 //Edit user
-// $('.nav-tabs a[href="#admin_form"]').on('shown.bs.tab', function () {
-//         console.log("test");
-// });
+async function EditUser(id) {
+        let edituser = {
+                "id" : editform.Id.value,
+                "username" : editform.Username.value,
+                "login": editform.Login.value,
+                "password": editform.Password.value
+        }
+
+        let response = await fetch('/adminpage/' + id, {
+                method: 'PUT',
+                headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(edituser)
+        });
+};
 
 //Delete user
 async function DeleteUser(id) {
@@ -53,9 +67,9 @@ async function DeleteUser(id) {
 //New user
 async function NewUser(form) {
         let newuser = {
-                "username" : form.username,
-                "login" : form.login,
-                "password" : form.password
+                "username" : newuserform.formusername.value,
+                "login": newuserform.formlogin.value,
+                "password": newuserform.formpassword.value
         };
 
         fetch('/adminpage/new', {
@@ -64,12 +78,8 @@ async function NewUser(form) {
                         'Accept': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newuser).then(res => res.json())
-                    .then(res => console.log(res))
+                body: JSON.stringify(newuser)
                 });
-
-        // alert(newuser);
-        // console.log(newuser);
 }
 
 //Preload page

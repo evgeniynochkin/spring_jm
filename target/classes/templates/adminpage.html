@@ -47,21 +47,21 @@
 
                         <div class="tab-pane" id="second" role="tabpanel" aria-labelledby="second-tab">
                             <div class="container mt-3" id="admin_form">
-                                <form action="" method="POST" onsubmit="NewUser(this)">
+                                <form name="newuserform" action="" method="POST" onsubmit="NewUser(this)">
                                     <h4>Добавить нового пользователя</h4>
                                     <div class="form-group">
                                         <label for="formGroupLoginInput">Логин</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" name="formlogin"
                                                id="formGroupLoginInput" placeholder="Логин"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="formGroupPasswordInput">Пароль</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" name="formpassword"
                                                id="formGroupPasswordInput" placeholder="Пароль"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="formGroupUsernameInput">Имя</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" name="formusername"
                                                id="formGroupUsernameInput" placeholder="Имя"/>
                                     </div>
                                     <button type="submit" class="btn btn-primary" value="save">Отправить</button>

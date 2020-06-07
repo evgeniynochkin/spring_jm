@@ -30,7 +30,7 @@ async function GetUser(id) {
                             <button type="submit" class="btn btn-primary" onclick="EditUser(${user.id})" value="save">Отправить</button>
                         </form>`
 
-        $('#editForm').append(formedit);
+        $('#editWindow').append(formedit);
         $('#editModalWindow').modal('show');
 }
 

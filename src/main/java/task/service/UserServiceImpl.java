@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserDetailsService {
         return true;
     }
 
+    public boolean updateUser(UserDataSet uds) {
+        udsRepository.save(uds);
+        return true;
+    }
+
     public void removeUser(long id) {
         udsRepository.deleteById(id);
     }

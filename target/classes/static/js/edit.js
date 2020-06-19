@@ -3,47 +3,27 @@ async function GetUser(id) {
         let response = await fetch('/adminpage/' + id, {
                 method: 'GET'
         });
+
         let userbyid = await response.json();
 
-        let formedit = `<form name="editform">
-                            <h2>Редактировать пользователя</h2>
-                            <div class="form-group">
-                                <label>ID</label>
-                                <input type="text" class="form-control" name="Id" value="${userbyid.id}"
-                                       placeholder="ID" readonly="readonly" />
-                            </div>
-                            <div class="form-group">
-                                <label>Логин</label>
-                                <input type="text" class="form-control" name="Login" value="${userbyid.login}"
-                                       placeholder="Логин"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Пароль</label>
-                                <input type="text" class="form-control" name="Password" value="${userbyid.password}"
-                                       placeholder="Пароль"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Имя</label>
-                                <input type="text" class="form-control" name="Username" value="${userbyid.username}"
-                                       placeholder="Имя"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary" onclick="EditUser(${user.id})" value="save">Отправить</button>
-                        </form>`
+        editform.id.value = userbyid.id;
+        editform.login.value = userbyid.login;
+        editform.password.value = userbyid.password;
+        editform.username.value = userbyid.username;
 
-        $('#editWindow').append(formedit);
         $('#editModalWindow').modal('show');
 }
 
 //Edit user
-async function EditUser(id) {
+async function EditUser(editform) {
         let edituser = {
-                "id" : editform.Id.value,
-                "username" : editform.Username.value,
-                "login": editform.Login.value,
-                "password": editform.Password.value
+                "id" : editform.id.value,
+                "username" : editform.username.value,
+                "login": editform.login.value,
+                "password": editform.password.value
         }
 
-        let response = await fetch('/adminpage/' + id, {
+        let response = await fetch('/adminpage/' + edituser.id, {
                 method: 'PUT',
                 headers: {
                         'Accept': 'application/json, text/plain, */*',
@@ -62,6 +42,8 @@ async function DeleteUser(id) {
         }).catch(err => {
                 console.error(err)
         });
+
+        location.reload();
 }
 
 //New user
@@ -83,7 +65,7 @@ async function NewUser(form) {
 }
 
 //Preload page
-$(document).ready(async function () {
+$(document).ready(async function() {
 
         let response = await fetch('/adminpage/list');
         let listuser = await response.json();
@@ -116,5 +98,15 @@ $(document).ready(async function () {
         });
         $('#userTable').append(lusers);
 });
+
+$(function() {
+        var url = window.location.href.substr( window.location.href.lastIndexOf( '/' ) + 1 );
+        $( '.navbar-nav a' ).each( function () {
+                if( $( this ).attr( 'href' ) === url || $( this ).attr( 'href' ) === '' ) {
+                        $( this ).parent( 'li' ).addClass( 'active' );
+                }
+        });
+});
+
 
 

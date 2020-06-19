@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
 
     <title>News</title>
 </head>
@@ -16,16 +17,15 @@
         <div class="header">
             <div th:insert="~{fragments/navbar :: navbar}"></div>
         </div>
-
         <div class="left_body">
             <div th:insert="~{fragments/nav :: nav}"></div>
         </div>
-
-        <div align="center">
-            <h2>Страница пользователя</h2>
-            <h3> Привет </h3> <h3 th:text="${user.getUsername()}"></h3>
-
-            <h5><a href="/index">Главная</a></h5>
+        <div class="rigth_body">
+            <div class="p-3 bg-light">
+                <h5>Страница пользователя</h5>
+                <h3 th:text="'Привет ' + ${user.getUsername()}"> </h3>
+<!--                <h5><a href="/index">Главная</a></h5>-->
+            </div>
         </div>
     </div>
 

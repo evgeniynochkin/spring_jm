@@ -42,6 +42,8 @@ async function DeleteUser(id) {
         }).catch(err => {
                 console.error(err)
         });
+
+        location.reload();
 }
 
 //New user
@@ -63,7 +65,7 @@ async function NewUser(form) {
 }
 
 //Preload page
-$(document).ready(async function () {
+$(document).ready(async function() {
 
         let response = await fetch('/adminpage/list');
         let listuser = await response.json();
@@ -96,5 +98,15 @@ $(document).ready(async function () {
         });
         $('#userTable').append(lusers);
 });
+
+$(function() {
+        var url = window.location.href.substr( window.location.href.lastIndexOf( '/' ) + 1 );
+        $( '.navbar-nav a' ).each( function () {
+                if( $( this ).attr( 'href' ) === url || $( this ).attr( 'href' ) === '' ) {
+                        $( this ).parent( 'li' ).addClass( 'active' );
+                }
+        });
+});
+
 
 

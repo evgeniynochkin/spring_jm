@@ -24,7 +24,7 @@ public class WebController {
         this.usi = usi;
     }
 
-    @GetMapping(value = {"/", "/index"})
+    @RequestMapping(value = {"/", "/index"})
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
@@ -38,7 +38,7 @@ public class WebController {
         return mav;
     }
 
-    @GetMapping(value = "/news")
+    @RequestMapping(value = "/news")
     public ModelAndView news() {
         ModelAndView mav = new ModelAndView();
         UserDataSet user = (UserDataSet) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -40,6 +40,7 @@
 
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                            <h2>Пользователи</h2>
                             <table class="table" id="userTable" border="1" cellpadding="5">
 
                             </table>
@@ -80,7 +81,7 @@
             <div class="container-fluid">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form name="editform" action="" method="post" onsubmit="EditUser(this)">
+                        <form id="editForm" name="editform" action="" method="post" onsubmit="EditUser(this)">
                             <h2>Редактировать пользователя</h2>
                             <div class="form-group">
                                 <label for="formGroupIDEdit">ID</label>
@@ -102,7 +103,8 @@
                                 <input type="text" class="form-control" name="username"
                                        id="formGroupUsernameInputEdit" placeholder="Имя"/>
                             </div>
-                            <button type="submit" class="btn btn-primary" value="save">Отправить</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Закрыть</button>
+                            <button type="submit" class="btn btn-primary" value="save">Редактировать пользователя</button>
                         </form>
                     </div>
                 </div>
